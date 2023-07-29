@@ -1,0 +1,7 @@
+<div>
+  <label id="field">Введите номер:</label>
+  <input for="field" [(ngModel)]="number" placeholder="Введите номер">
+</div>
+<div>
+  <button (click)="dialogRef.close(number)">OK</button>
+</div>

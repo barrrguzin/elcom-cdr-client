@@ -1,0 +1,37 @@
+<div class="container">
+  <div style="width: 50%; float:left">
+    <table class="responsive-table">
+      <caption>Статистика по входящим вызовам</caption>
+      <thead>
+      <tr>
+        <th scope="col">Оператор</th>
+        <th scope="col">Минуты</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let key of incomingCallsReportKeys">
+        <th scope="row">{{key}}</th>
+        <td>{{incomingCallsReport[key]}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="width: 50%; float:right">
+    <table class="responsive-table">
+      <caption>Статистика по исходящим вызовам</caption>
+      <thead>
+      <tr>
+        <th scope="col">Оператор</th>
+        <th scope="col">Минуты</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let key of outgoingCallsReportKeys">
+        <th scope="row">{{key}}</th>
+        <td>{{outgoingCallsReport[key]}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

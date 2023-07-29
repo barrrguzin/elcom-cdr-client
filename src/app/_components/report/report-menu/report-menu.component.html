@@ -1,0 +1,53 @@
+<div class="container">
+  <div style="width: 65%; float:left">
+    <div style="width: 40%; float:left">
+      <ul class="vertical ex">
+        <li><button class="button" mat-flat-button color="primary" (click)="getAllOperatorReport()">Отчет по всем операторам</button></li>
+        <li><button class="button" mat-flat-button color="primary" (click)="getOperatorReportByList()">Отчет по выбранным операторам</button></li>
+        <li><button class="button" mat-flat-button color="primary" (click)="getOperatorReportOnEmail()">Получить отчет по выбранным операторам на почту</button></li>
+        <li><button class="button" mat-flat-button color="primary" routerLink="/operator">Операторы</button></li>
+      </ul>
+      <mat-form-field class="example-form-field">
+        <mat-label>Email:</mat-label>
+        <input matInput type="text" [(ngModel)]="email">
+        <button *ngIf="email" matSuffix mat-icon-button aria-label="Add" (click)=addEmailToList()>
+          <mat-icon>done_outline</mat-icon>
+        </button>
+      </mat-form-field>
+      <p *ngFor="let email of recipientsList">
+        <button class="button" mat-flat-button color="basic" (click)="deleteFromRecipientsList(email)">
+          {{email}}    <mat-icon>close</mat-icon>
+        </button>
+      </p>
+    </div>
+    <div style="width: 60%; float:right">
+      <section class="example-section">
+        <h4>Выберите операторов:</h4>
+        <p *ngFor="let operator of operators">
+          <mat-checkbox (change)="addOperatorToList(operator.id)">
+            {{operator.name}}
+          </mat-checkbox>
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <div style="width: 35%; float:right; align-content: center">
+    <div style="width: 50%; float:left; align-content: center">
+      <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="selected"></mat-calendar>
+      </mat-card>
+    </div>
+    <div style="width: 50%; float:right; align-content: center">
+      <p>
+        Выберите дату и установите ее:
+      </p>
+      <button class="button" mat-flat-button color="primary" (click)="setStartDate()">Дата начала: {{startDate}}</button>
+      <br/>
+      <button class="button" mat-flat-button color="primary" (click)="setEndDate()">Дата окончания: {{endDate}}</button>
+    </div>
+  </div>
+</div>
+
+
+

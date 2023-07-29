@@ -1,0 +1,29 @@
+<div class="container">
+<!--  <table class="responsive-table" matSort (matSortChange)="sortData($event)">-->
+  <table class="responsive-table">
+    <thead>
+    <tr>
+      <th scope="col" mat-sort-header="mame">Наименование</th>
+      <th scope="col" mat-sort-header="lines">Модули и линии</th>
+      <th scope="col" mat-sort-header="inputDestinations">Входящие направления</th>
+      <th scope="col" mat-sort-header="outputDestinations">Исходящие направления</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let operator of operators">
+      <th scope="row" routerLink="/operator/{{operator.id}}">
+        {{operator.name}}
+      </th>
+      <td>
+        <a *ngFor="let line of operator.lines">{{line.lineNumber}}:{{line.moduleNumber}}; </a>
+      </td>
+      <td>
+        {{operator.inputDestination}}
+      </td>
+      <td>
+        {{operator.outputDestination}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

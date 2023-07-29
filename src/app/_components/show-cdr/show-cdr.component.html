@@ -1,0 +1,84 @@
+<div>
+  <mat-form-field>
+    <mat-label>Количество записей на странице</mat-label>
+    <mat-select [(value)]="quantity">
+      <mat-option (onSelectionChange)="setQuantity($event)" value="10">10</mat-option>
+      <mat-option (onSelectionChange)="setQuantity($event)" value="25">25</mat-option>
+      <mat-option (onSelectionChange)="setQuantity($event)" value="50">50</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="previousPage()">Назад</button>
+  <button mat-raised-button color="primary" (click)="nextPage()">Вперед</button>
+</div>
+<div class="container">
+  <table class="responsive-table">
+    <thead>
+    <tr>
+      <th scope="col">Входящая линия (Линия:Модуль)</th>
+      <th scope="col">Исходящая линия (Линия:Модуль)</th>
+      <th scope="col">Время начала вызова</th>
+      <th scope="col">Длительность вызова, сек</th>
+      <th scope="col">Номер А</th>
+      <th scope="col">Номер Б</th>
+      <th scope="col">Тип соединения</th>
+      <th scope="col">Длительность вызова, мин</th>
+      <th scope="col">Входящее направление</th>
+      <th scope="col">Исходящие направление</th>
+      <th scope="col">Код услуги ДВО</th>
+      <th scope="col">Категория вызывающего номера</th>
+      <th scope="col">Длительность вызова</th>
+      <th scope="col">От оператора</th>
+      <th scope="col">На оператора</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of rows">
+      <td>
+        {{row.sourceModule.lineNumber}}:{{row.sourceModule.moduleNumber}}
+      </td>
+      <td>
+        {{row.destinationModule.lineNumber}}:{{row.destinationModule.moduleNumber}}
+      </td>
+      <td>
+        {{toDate(row.callStartDate)}}
+      </td>
+      <td>
+        {{row.callDurationSeconds}}
+      </td>
+      <td>
+        {{row.numberA}}
+      </td>
+      <td>
+        {{row.numberB}}
+      </td>
+      <td>
+        {{row.connectionType}}
+      </td>
+      <td>
+        {{row.callDurationMinutes}}
+      </td>
+      <td>
+        {{row.inputDestinationNumber}}
+      </td>
+      <td>
+        {{row.outputDestinationNumber}}
+      </td>
+      <td>
+        {{row.ssCode}}
+      </td>
+      <td>
+        {{row.callingNumberCategory}}
+      </td>
+      <td>
+        {{row.callDurationMinutesAndSeconds}}
+      </td>
+      <td>
+        <a *ngIf="row.fromOperator">{{row.fromOperator.name}}</a>
+      </td>
+      <td>
+        <a *ngIf="row.toOperator">{{row.toOperator.name}}</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

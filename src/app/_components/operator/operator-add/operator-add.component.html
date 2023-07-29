@@ -1,0 +1,88 @@
+<form role="form" class="form-signin form-group">
+
+  <div class="container">
+    <table class="responsive-table">
+      <thead>
+      <tr>
+        <th scope="col">
+          Параметр
+        </th>
+        <th scope="col">
+          Значение
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">
+          Наименование:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" id="name" placeholder="Наименование" name="name" value="" class="form-control" [(ngModel)]="operator.name" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Модули и линии:
+          <br/>
+          <br/>
+          Введите в поле "Линия" номер линии в указаном модуле;<br/>
+          Введите в поле "Линия" -1- чтобы выбрать линии с 0 по 31;<br/>
+          Введите в поле "Линия" -2- чтобы выбрать линии с 32 по 63;<br/>
+          Оставьте поле "Линия" пустым, чтобы выбрать все линии в модуле;
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" id="module" placeholder="Модуль" name="module" value="" class="form-control" [(ngModel)]="moduleNumber">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" id="line" placeholder="Линия" name="line" value="" class="form-control" [(ngModel)]="lineNumber">
+          </mat-form-field>
+          <a *ngFor="let moduleAndLinePair of showLines.value">{{moduleAndLinePair.moduleNumber}}:{{moduleAndLinePair.lineNumber}}; </a>
+          <br/>
+          <a class="button" mat-flat-button color="primary" (click)="addLineAndModulePairWithOptions()">Добавить комбинацию модуля и линии</a>
+          <a class="button" mat-flat-button color="warn" (click)="resetLines()">Сброс</a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Входящие направления:
+        </th>
+        <td>
+          <div>
+            <mat-form-field>
+              <input matInput type="text" id="inputDestinations" placeholder="Входящие направления" name="inputDestinations" class="form-control" [(ngModel)]="operator.inputDestination">
+            </mat-form-field>
+<!--            <a *ngFor="let destination of showInputDestinations.value">{{destination}}; </a>-->
+<!--            <br/>-->
+<!--            <a class="button" mat-flat-button color="primary" (click)="addToInputDestination()">Добавить входящее напралвение</a>-->
+<!--            <a class="button" mat-flat-button color="warn" (click)="resetInputDestinations()">Сброс</a>-->
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Исходящие направления:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" id="outputDestinations" placeholder="Исходящие направления" name="outputDestinations" value="" class="form-control" [(ngModel)]="operator.outputDestination">
+          </mat-form-field>
+<!--          <a *ngFor="let destination of showOutputDestinations.value">{{destination}}; </a>-->
+<!--          <br/>-->
+<!--          <a class="button" mat-flat-button color="primary" (click)="addToOutputDestination()">Добавить исходящее напралвение</a>-->
+<!--          <a class="button" mat-flat-button color="warn" (click)="resetOutputDestinations()">Сброс</a>-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <h1>{{errorMessage.value}}</h1>
+  <div class="btn-group">
+    <button type="submit" class="button" mat-flat-button color="primary" (click)="addOperator()">Добавить</button>
+    <button class="button" mat-flat-button routerLink="/operator" color="basic" type="button">Назад</button>
+  </div>
+</form>
+

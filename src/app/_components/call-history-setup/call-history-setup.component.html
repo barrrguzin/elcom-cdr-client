@@ -1,0 +1,53 @@
+<form role="form" class="form-signin form-group">
+
+  <div class="container">
+    <table class="responsive-table">
+      <thead>
+      <tr>
+        <th scope="col">
+          Параметр
+        </th>
+        <th scope="col">
+          Значение
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">
+          Номер:
+        </th>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" id="number" placeholder="Номер" name="number" value="" class="form-control" [(ngModel)]="number" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          Дата начала сбора истории:
+        </th>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="btn-group">
+    <button type="submit" class="button" mat-flat-button color="primary" (click)="getHistory()">Посмотреть историю</button>
+    <button type="submit" class="button" mat-flat-button color="primary" (click)="downloadHistory()">Скачать историю</button>
+    <button class="button" mat-flat-button routerLink="/" color="basic" type="button">Назад</button>
+  </div>
+</form>
+
+
