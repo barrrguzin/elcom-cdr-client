@@ -6,7 +6,7 @@ import { UploadCDRComponent } from './_components/upload-cdr/upload-cdr.componen
 import { MainMenuComponent } from './_components/main-menu/main-menu.component';
 import {RouterModule, Routes} from "@angular/router";
 import {MatIconModule} from '@angular/material/icon';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { ShowCDRComponent } from './_components/show-cdr/show-cdr.component';
@@ -29,23 +29,29 @@ import { AllOperatorReportComponent } from './_components/report/all-operator-re
 import { ReportMenuComponent } from './_components/report/report-menu/report-menu.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {authGuard} from "./_services/auth.guard";
+import { LoginComponent } from './_components/login/login.component';
+import {AuthInterceptor} from "./_helpers/auth.interceptor";
+import { AuthorityErrorDialogComponent } from './_components/_dialogs/authority-error-dialog/authority-error-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
 
 
 const appRoutes: Routes = [
-  {path: '', component: MainMenuComponent},
-  {path: 'upload', component: UploadCDRComponent},
-  {path: 'cdr', component: ShowCDRComponent},
-  {path: 'report/menu', component: ReportMenuComponent},
-  {path: 'report', component: AllOperatorReportComponent},
-  {path: 'history', component: CallHistorySetupComponent},
-  {path: 'history/:number', component: ShowNumbeCallHistoryComponent},
-  {path: 'operator', component: OperatorListComponent},
-  {path: 'operator/add', component: OperatorAddComponent},
-  {path: 'operator/:id', component: OperatorShowComponent},
-  {path: 'about', component: AboutComponent},
+  {path: '', component: MainMenuComponent, canActivate: [authGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'upload', component: UploadCDRComponent, canActivate: [authGuard]},
+  {path: 'cdr', component: ShowCDRComponent, canActivate: [authGuard]},
+  {path: 'report/menu', component: ReportMenuComponent, canActivate: [authGuard]},
+  {path: 'report', component: AllOperatorReportComponent, canActivate: [authGuard]},
+  {path: 'history', component: CallHistorySetupComponent, canActivate: [authGuard]},
+  {path: 'history/:number', component: ShowNumbeCallHistoryComponent, canActivate: [authGuard]},
+  {path: 'operator', component: OperatorListComponent, canActivate: [authGuard]},
+  {path: 'operator/add', component: OperatorAddComponent, canActivate: [authGuard]},
+  {path: 'operator/:id', component: OperatorShowComponent, canActivate: [authGuard]},
+  {path: 'about', component: AboutComponent, canActivate: [authGuard]},
 ]
 
 
@@ -64,7 +70,9 @@ const appRoutes: Routes = [
     CallHistorySetupComponent,
     AboutComponent,
     AllOperatorReportComponent,
-    ReportMenuComponent
+    ReportMenuComponent,
+    LoginComponent,
+    AuthorityErrorDialogComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -84,8 +92,11 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
   ],
-  providers: [ShowCDRComponent],
+  providers: [ShowCDRComponent,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

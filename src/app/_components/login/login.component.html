@@ -1,0 +1,25 @@
+<div class="text-center">
+  <main class="form-signin">
+    <form role="form" (ngSubmit)="login()" class="form-signin form-group">
+      <img src="/assets/img/icon.ico" alt="" width="256" height="256">
+
+      <div class="form-floating form-group form__group field">
+        <input type="input" id="username" name="username" placeholder="Логин" value="" class="form-control form__field" [(ngModel)]="credentials.username" />
+        <label class="form__label" for="username">Логин</label>
+      </div>
+
+      <div class="form-floating form-group form__group field">
+        <input type="password" id="password" name="password" placeholder="Пароль" value="" class="form-control form__field" [(ngModel)]="credentials.password" />
+        <label class="form__label" for="password">Пароль</label>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="remember-me" value="remember-me" name="remember-me" [(ngModel)]="credentials.remember_me">
+          Запомнить
+        </label>
+      </div>
+      <button class="button" type="submit" mat-flat-button color="primary">Войти</button>
+    </form>
+  </main>
+</div>
